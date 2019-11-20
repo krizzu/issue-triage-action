@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Find old issues and mark them stale
-      uses: Krizzu/issue-triage-action@v1.0.1
+      uses: Krizzu/issue-triage-action@v1.0.0
       with:
         ghToken: ${{ secrets.GITHUB_TOKEN }}
         staleAfter: 30
