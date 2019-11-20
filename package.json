@@ -1,0 +1,35 @@
+{
+  "name": "@krizzu/issue_triage_action",
+  "version": "0.0.1",
+  "description": "Github action that finds and handles old issues in project",
+  "main": "dist/index.js",
+  "author": "Krzysztof Borowy <dev@krizzu.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Krizzu/issue-triage-action.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn build"
+    }
+  },
+  "scripts": {
+    "dev": "source .env && node dist/index.js",
+    "prepublishOnly": "rm -rf dist/ && yarn build",
+    "build": "ncc build src/index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.1.0",
+    "@actions/github": "^1.1.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5",
+    "eslint": "^6.6.0",
+    "eslint-config-krizzu": "^1.0.3",
+    "husky": "^3.1.0"
+  }
+}

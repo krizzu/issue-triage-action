@@ -1,0 +1,34 @@
+name: 'Issue triage'
+description: "Deals with stale issues in your project."
+author: "krizzu"
+inputs:
+  ghToken:
+    description: 'GitHub token'
+    required: true
+  staleAfter:
+    description: number of days to consider an issue to be stale
+    required: false
+    default: 30
+  closeAfter:
+    description: number of days after the issue should be closed (0 days means off, must be higher than `staleAfter`)
+    required: false
+    default: 0
+  staleLabel:
+    description: label to be set to the stale issue
+    required: false
+    default: "STALE 📺"
+  staleComment:
+    description: a template comment to be placed when handling the issue
+    required: false
+  closeComment:
+    description: a template comment to be placed when closing the issue
+    required: false
+  showLogs:
+    description: Show logs with info like total number of issues found, stale issues, closed etc.
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'tag'
+  color: 'purple'
