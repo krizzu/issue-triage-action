@@ -38,9 +38,19 @@ class ActionIssueTriage {
       try {
         let isClosingDown = false;
 
+        let hasCloseSkipLabel = false;
+        if (this.opts.closeSkipLabels) {
+          for (const label of issue.labels) {
+            if (this.opts.closeSkipLabels.indexOf(label)) {
+              hasCloseSkipLabel = true;
+            }
+          }
+        }
+
         if (
           this.opts.closeAfter > this.opts.staleAfter &&
-          this._isOlderThan(issue.updated_at, this.opts.closeAfter)
+          this._isOlderThan(issue.updated_at, this.opts.closeAfter) &&
+          !hasCloseSkipLabel
         ) {
           isClosingDown = true;
         }
