@@ -45,6 +45,7 @@ jobs:
         closeAfter: 60
         staleLabel: "STALE 📺"
         staleComment: "This issue is %DAYS_OLD% days old, marking as stale! cc: @%AUTHOR%"
+        closeSkipLabels: "priority/P0,priority/P1"
         closeComment: "Issue last updated %DAYS_OLD% days ago! Closing down!"
         showLogs: true
 ```

@@ -4611,9 +4611,19 @@ class ActionIssueTriage {
       try {
         let isClosingDown = false;
 
+        let hasCloseSkipLabel = false;
+        if (this.opts.closeSkipLabels) {
+          for (const label of issue.labels.map((i) => i.name)) {
+            if (this.opts.closeSkipLabels.split(',').indexOf(label) > 0) {
+              hasCloseSkipLabel = true;
+            }
+          }
+        }
+
         if (
           this.opts.closeAfter > this.opts.staleAfter &&
-          this._isOlderThan(issue.updated_at, this.opts.closeAfter)
+          this._isOlderThan(issue.updated_at, this.opts.closeAfter) &&
+          !hasCloseSkipLabel
         ) {
           isClosingDown = true;
         }
@@ -7743,8 +7753,9 @@ const closeCommentDefault = `🤖 Beep Boop 🤖 \n\nThis issue was inactive for
 const staleAfter = core.getInput('staleAfter') || 30;
 const closeAfter = core.getInput('closeAfter') || 0;
 const staleComment = core.getInput('staleComment') || staleCommentDefault;
-const closeComment = core.getInput('staleComment') || closeCommentDefault;
+const closeComment = core.getInput('closeComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
+const closeSkipLabels = core.getInput('closeSkipLabels') || '';
 const showLogs = core.getInput('showLogs') || 'true';
 
 const GH_TOKEN = core.getInput('ghToken', {
@@ -7757,6 +7768,7 @@ const options = {
   staleAfter: +staleAfter,
   closeAfter: +closeAfter,
   staleComment,
+  closeSkipLabels,
   closeComment,
   staleLabel,
   showLogs: showLogs === 'true',
