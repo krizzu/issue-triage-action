@@ -13,6 +13,7 @@ const closeAfter = core.getInput('closeAfter') || 0;
 const staleComment = core.getInput('staleComment') || staleCommentDefault;
 const closeComment = core.getInput('staleComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
+const actionSkipLabels = core.getInput('actionSkipLabels') || '';
 const showLogs = core.getInput('showLogs') || 'true';
 
 const GH_TOKEN = core.getInput('ghToken', {
@@ -27,6 +28,7 @@ const options = {
   staleComment,
   closeComment,
   staleLabel,
+  actionSkipLabels,
   showLogs: showLogs === 'true',
 };
 

@@ -17,6 +17,10 @@ inputs:
     description: label to be set to the stale issue
     required: false
     default: "STALE 📺"
+  actionSkipLabels:
+    description: labels to do nothing
+    required: false
+    default: ""
   staleComment:
     description: a template comment to be placed when handling the issue
     required: false
