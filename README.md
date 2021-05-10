@@ -19,6 +19,7 @@ GitHub action that deals with stale issues in your project.
 
 - `staleLabel` *string*, a label to be set to the stale issue, __default__: `STALE`
 - `staleComment` *string*, a comment placed when marking issue as stale. See a [guide on how to style this message](#styling-close-comment).
+- `closeSkipLabels` *string*, comma separated list of labels for skip closing the issue
 - `closeComment` *string*, a comment placed when closing issue. See a [guide on how to style this message](#styling-close-comment).
 
 - `showLogs` *bool*. Show logs with info like total number of issues found, stale issues, closed etc. __default__: `true`
@@ -44,6 +45,7 @@ jobs:
         closeAfter: 60
         staleLabel: "STALE 📺"
         staleComment: "This issue is %DAYS_OLD% days old, marking as stale! cc: @%AUTHOR%"
+        closeSkipLabels: "priority/P0,priority/P1"
         closeComment: "Issue last updated %DAYS_OLD% days ago! Closing down!"
         showLogs: true
 ```

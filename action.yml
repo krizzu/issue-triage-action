@@ -1,4 +1,4 @@
-name: 'Issue triage'
+name: 'Issue triage customized'
 description: "Deals with stale issues in your project."
 author: "krizzu"
 inputs:
@@ -17,8 +17,14 @@ inputs:
     description: label to be set to the stale issue
     required: false
     default: "STALE 📺"
+  actionSkipLabels:
+    description: list of labels to do nothing
+    required: false
   staleComment:
     description: a template comment to be placed when handling the issue
+    required: false
+  closeSkipLabels:
+    description: list of labels for skip closing the issue
     required: false
   closeComment:
     description: a template comment to be placed when closing the issue

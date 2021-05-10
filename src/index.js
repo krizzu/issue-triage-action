@@ -11,8 +11,10 @@ const closeCommentDefault = `🤖 Beep Boop 🤖 \n\nThis issue was inactive for
 const staleAfter = core.getInput('staleAfter') || 30;
 const closeAfter = core.getInput('closeAfter') || 0;
 const staleComment = core.getInput('staleComment') || staleCommentDefault;
-const closeComment = core.getInput('staleComment') || closeCommentDefault;
+const closeComment = core.getInput('closeComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
+const actionSkipLabels = core.getInput('actionSkipLabels') || '';
+const closeSkipLabels = core.getInput('closeSkipLabels') || '';
 const showLogs = core.getInput('showLogs') || 'true';
 
 const GH_TOKEN = core.getInput('ghToken', {
@@ -25,8 +27,10 @@ const options = {
   staleAfter: +staleAfter,
   closeAfter: +closeAfter,
   staleComment,
+  closeSkipLabels,
   closeComment,
   staleLabel,
+  actionSkipLabels,
   showLogs: showLogs === 'true',
 };
 
