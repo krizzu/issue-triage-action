@@ -1,4 +1,4 @@
-name: 'Issue triage'
+name: 'Issue triage customized'
 description: "Deals with stale issues in your project."
 author: "krizzu"
 inputs:
