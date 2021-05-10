@@ -4611,6 +4611,19 @@ class ActionIssueTriage {
       try {
         let isClosingDown = false;
 
+        let hasActionSkipLabel = false;
+        if (this.opts.actionSkipLabels) {
+          for (const label of issue.labels.map((i) => i.name)) {
+            if (this.opts.actionSkipLabels.split(',').indexOf(label) > 0) {
+              hasActionSkipLabel = true;
+            }
+          }
+        }
+
+        if (hasActionSkipLabel) {
+          continue;
+        }
+
         let hasCloseSkipLabel = false;
         if (this.opts.closeSkipLabels) {
           for (const label of issue.labels.map((i) => i.name)) {
@@ -4619,6 +4632,7 @@ class ActionIssueTriage {
             }
           }
         }
+
 
         if (
           this.opts.closeAfter > this.opts.staleAfter &&
@@ -7755,6 +7769,7 @@ const closeAfter = core.getInput('closeAfter') || 0;
 const staleComment = core.getInput('staleComment') || staleCommentDefault;
 const closeComment = core.getInput('closeComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
+const actionSkipLabels = core.getInput('actionSkipLabels') || '';
 const closeSkipLabels = core.getInput('closeSkipLabels') || '';
 const showLogs = core.getInput('showLogs') || 'true';
 
@@ -7771,6 +7786,7 @@ const options = {
   closeSkipLabels,
   closeComment,
   staleLabel,
+  actionSkipLabels,
   showLogs: showLogs === 'true',
 };
 
