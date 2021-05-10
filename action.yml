@@ -23,6 +23,9 @@ inputs:
   staleComment:
     description: a template comment to be placed when handling the issue
     required: false
+  closeSkipLabels:
+    description: list of labels for skip closing the issue
+    required: false
   closeComment:
     description: a template comment to be placed when closing the issue
     required: false
