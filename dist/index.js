@@ -4611,6 +4611,19 @@ class ActionIssueTriage {
       try {
         let isClosingDown = false;
 
+        let hasActionSkipLabel = false;
+        if (this.opts.actionSkipLabels) {
+          for (const label of issue.labels.map((i) => i.name)) {
+            if (this.opts.actionSkipLabels.split(',').indexOf(label) > 0) {
+              hasActionSkipLabel = true;
+            }
+          }
+        }
+
+        if (hasActionSkipLabel) {
+          continue;
+        }
+
         if (
           this.opts.closeAfter > this.opts.staleAfter &&
           this._isOlderThan(issue.updated_at, this.opts.closeAfter)
@@ -7745,6 +7758,7 @@ const closeAfter = core.getInput('closeAfter') || 0;
 const staleComment = core.getInput('staleComment') || staleCommentDefault;
 const closeComment = core.getInput('staleComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
+const actionSkipLabels = core.getInput('actionSkipLabels') || '';
 const showLogs = core.getInput('showLogs') || 'true';
 
 const GH_TOKEN = core.getInput('ghToken', {
@@ -7759,6 +7773,7 @@ const options = {
   staleComment,
   closeComment,
   staleLabel,
+  actionSkipLabels,
   showLogs: showLogs === 'true',
 };
 
