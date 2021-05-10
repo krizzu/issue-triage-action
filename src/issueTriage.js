@@ -47,13 +47,23 @@ class ActionIssueTriage {
           }
         }
 
+        let hasCloseSkipLabel = false;
+        if (this.opts.closeSkipLabels) {
+          for (const label of issue.labels.map((i) => i.name)) {
+            if (this.opts.closeSkipLabels.split(',').indexOf(label) > 0) {
+              hasCloseSkipLabel = true;
+            }
+          }
+        }
+
         if (hasActionSkipLabel) {
           continue;
         }
 
         if (
           this.opts.closeAfter > this.opts.staleAfter &&
-          this._isOlderThan(issue.updated_at, this.opts.closeAfter)
+          this._isOlderThan(issue.updated_at, this.opts.closeAfter) &&
+          !hasCloseSkipLabel
         ) {
           isClosingDown = true;
         }
