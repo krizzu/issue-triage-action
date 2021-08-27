@@ -26,6 +26,9 @@ inputs:
   showLogs:
     description: Show logs with info like total number of issues found, stale issues, closed etc.
     required: false
+  issueLabels:
+    description: comma separated list of labels to filters issues by (issue need to have all the specified labels)
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

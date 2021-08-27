@@ -120,6 +120,7 @@ class ActionIssueTriage {
     const issuesPerPage = 100;
 
     const getIssuesForPage = async page => {
+      const labels = this.opts.issueLabels ? { labels: this.opts.issueLabels } : {}
       const { data: issuesResponse } = await this.kit.issues.listForRepo({
         owner: this.opts.repoOwner,
         repo: this.opts.repoName,
@@ -128,6 +129,7 @@ class ActionIssueTriage {
         direction: 'desc',
         per_page: issuesPerPage,
         page,
+        ...labels
       });
 
       return issuesResponse.filter(this._isIssue);

@@ -14,6 +14,7 @@ const staleComment = core.getInput('staleComment') || staleCommentDefault;
 const closeComment = core.getInput('staleComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
 const showLogs = core.getInput('showLogs') || 'true';
+const issueLabels = core.getInput('issueLabels');
 
 const GH_TOKEN = core.getInput('ghToken', {
   required: true,
@@ -28,6 +29,7 @@ const options = {
   closeComment,
   staleLabel,
   showLogs: showLogs === 'true',
+  issueLabels
 };
 
 const action = new ActionIssueTriage(new github.GitHub(GH_TOKEN), options);
