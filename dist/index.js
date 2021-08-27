@@ -4693,6 +4693,7 @@ class ActionIssueTriage {
     const issuesPerPage = 100;
 
     const getIssuesForPage = async page => {
+      const labels = this.opts.issueLabels ? { labels: this.opts.issueLabels } : {}
       const { data: issuesResponse } = await this.kit.issues.listForRepo({
         owner: this.opts.repoOwner,
         repo: this.opts.repoName,
@@ -4701,6 +4702,7 @@ class ActionIssueTriage {
         direction: 'desc',
         per_page: issuesPerPage,
         page,
+        ...labels
       });
 
       return issuesResponse.filter(this._isIssue);
@@ -7746,6 +7748,7 @@ const staleComment = core.getInput('staleComment') || staleCommentDefault;
 const closeComment = core.getInput('staleComment') || closeCommentDefault;
 const staleLabel = core.getInput('staleLabel') || 'STALE';
 const showLogs = core.getInput('showLogs') || 'true';
+const issueLabels = core.getInput('issueLabels');
 
 const GH_TOKEN = core.getInput('ghToken', {
   required: true,
@@ -7760,6 +7763,7 @@ const options = {
   closeComment,
   staleLabel,
   showLogs: showLogs === 'true',
+  issueLabels
 };
 
 const action = new ActionIssueTriage(new github.GitHub(GH_TOKEN), options);
