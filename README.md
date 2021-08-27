@@ -17,6 +17,7 @@ GitHub action that deals with stale issues in your project.
 - `staleAfter` *int*, number of days to consider an issue to be stale, __default__: `30`
 - `closeAfter` *int*, number of days after the issue should be closed (0 days means off, must be higher than `staleAfter`), __default__: `0`
 
+- `issueLabels` *string*, comma separated list of labels to filter the issues by (optional)
 - `staleLabel` *string*, a label to be set to the stale issue, __default__: `STALE`
 - `staleComment` *string*, a comment placed when marking issue as stale. See a [guide on how to style this message](#styling-close-comment).
 - `closeComment` *string*, a comment placed when closing issue. See a [guide on how to style this message](#styling-close-comment).
@@ -37,11 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Find old issues and mark them stale
-      uses: Krizzu/issue-triage-action@v1.0.0
+      uses: Krizzu/issue-triage-action@v1.1.0
       with:
         ghToken: ${{ secrets.GITHUB_TOKEN }}
         staleAfter: 30
         closeAfter: 60
+        issueLabels: bug
         staleLabel: "STALE 📺"
         staleComment: "This issue is %DAYS_OLD% days old, marking as stale! cc: @%AUTHOR%"
         closeComment: "Issue last updated %DAYS_OLD% days ago! Closing down!"
